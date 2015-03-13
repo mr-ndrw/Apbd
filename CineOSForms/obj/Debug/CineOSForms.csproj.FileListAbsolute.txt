@@ -1,0 +1,13 @@
+c:\users\andrew\documents\visual studio 2013\Projects\CineOSForms\CineOSForms\bin\Debug\CineOSForms.exe.config
+c:\users\andrew\documents\visual studio 2013\Projects\CineOSForms\CineOSForms\bin\Debug\CineOSForms.exe
+c:\users\andrew\documents\visual studio 2013\Projects\CineOSForms\CineOSForms\bin\Debug\CineOSForms.pdb
+c:\users\andrew\documents\visual studio 2013\Projects\CineOSForms\CineOSForms\obj\Debug\CineOSForms.csprojResolveAssemblyReference.cache
+c:\users\andrew\documents\visual studio 2013\Projects\CineOSForms\CineOSForms\obj\Debug\CineOSForms.Form1.resources
+c:\users\andrew\documents\visual studio 2013\Projects\CineOSForms\CineOSForms\obj\Debug\CineOSForms.Properties.Resources.resources
+c:\users\andrew\documents\visual studio 2013\Projects\CineOSForms\CineOSForms\obj\Debug\CineOSForms.csproj.GenerateResource.Cache
+c:\users\andrew\documents\visual studio 2013\Projects\CineOSForms\CineOSForms\obj\Debug\CineOSForms.exe
+c:\users\andrew\documents\visual studio 2013\Projects\CineOSForms\CineOSForms\obj\Debug\CineOSForms.pdb
+c:\users\andrew\documents\visual studio 2013\Projects\CineOSForms\CineOSForms\bin\Debug\EntityFramework.dll
+c:\users\andrew\documents\visual studio 2013\Projects\CineOSForms\CineOSForms\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\andrew\documents\visual studio 2013\Projects\CineOSForms\CineOSForms\bin\Debug\EntityFramework.xml
+c:\users\andrew\documents\visual studio 2013\Projects\CineOSForms\CineOSForms\bin\Debug\EntityFramework.SqlServer.xml

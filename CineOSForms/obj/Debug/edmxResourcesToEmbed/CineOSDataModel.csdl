@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ApbdModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cinema">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TelephoneNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdRegion" Type="Int32" Nullable="false" />
+    <Property Name="IdManager" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_Cinema_EmployeeManager" FromRole="Cinema" ToRole="Employee" />
+    <NavigationProperty Name="Region" Relationship="Self.FK_Cinema_Region" FromRole="Cinema" ToRole="Region" />
+    <NavigationProperty Name="ProjectionRoom" Relationship="Self.FK_ProjectionRoom_Cinema" FromRole="Cinema" ToRole="ProjectionRoom" />
+    <NavigationProperty Name="Work" Relationship="Self.FK_Work_Cinema" FromRole="Cinema" ToRole="Work" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TelephoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="320" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Cinema" Relationship="Self.FK_Cinema_EmployeeManager" FromRole="Employee" ToRole="Cinema" />
+    <NavigationProperty Name="Service" Relationship="Self.FK_Service_Employee" FromRole="Employee" ToRole="Service" />
+    <NavigationProperty Name="Work" Relationship="Self.FK_Work_Employee" FromRole="Employee" ToRole="Work" />
+  </EntityType>
+  <EntityType Name="Projection">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Length" Type="Int32" Nullable="false" />
+    <Property Name="IdProjectionRoom" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ProjectionRoom" Relationship="Self.FK_Projection_ProjectionRoom" FromRole="Projection" ToRole="ProjectionRoom" />
+    <NavigationProperty Name="Service" Relationship="Self.FK_Service_Projection" FromRole="Projection" ToRole="Service" />
+  </EntityType>
+  <EntityType Name="ProjectionRoom">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdCinema" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RoomNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Cinema" Relationship="Self.FK_ProjectionRoom_Cinema" FromRole="ProjectionRoom" ToRole="Cinema" />
+    <NavigationProperty Name="Projection" Relationship="Self.FK_Projection_ProjectionRoom" FromRole="ProjectionRoom" ToRole="Projection" />
+  </EntityType>
+  <EntityType Name="Region">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Cinema" Relationship="Self.FK_Cinema_Region" FromRole="Region" ToRole="Cinema" />
+  </EntityType>
+  <EntityType Name="Seat">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdProjectionRoom" Type="Int32" Nullable="false" />
+    <Property Name="Row" Type="Int32" Nullable="false" />
+    <Property Name="Col" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="IdEmployee" />
+      <PropertyRef Name="IdProjection" />
+    </Key>
+    <Property Name="IdEmployee" Type="Int32" Nullable="false" />
+    <Property Name="IdProjection" Type="Int32" Nullable="false" />
+    <Property Name="Role" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_Service_Employee" FromRole="Service" ToRole="Employee" />
+    <NavigationProperty Name="Projection" Relationship="Self.FK_Service_Projection" FromRole="Service" ToRole="Projection" />
+  </EntityType>
+  <EntityType Name="Work">
+    <Key>
+      <PropertyRef Name="IdEmployee" />
+      <PropertyRef Name="IdCinema" />
+    </Key>
+    <Property Name="IdEmployee" Type="Int32" Nullable="false" />
+    <Property Name="IdCinema" Type="Int32" Nullable="false" />
+    <Property Name="DateFrom" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DateTo" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Cinema" Relationship="Self.FK_Work_Cinema" FromRole="Work" ToRole="Cinema" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_Work_Employee" FromRole="Work" ToRole="Employee" />
+  </EntityType>
+  <Association Name="FK_Cinema_EmployeeManager">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Cinema" Type="Self.Cinema" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cinema">
+        <PropertyRef Name="IdManager" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cinema_Region">
+    <End Role="Region" Type="Self.Region" Multiplicity="1" />
+    <End Role="Cinema" Type="Self.Cinema" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Region">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cinema">
+        <PropertyRef Name="IdRegion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectionRoom_Cinema">
+    <End Role="Cinema" Type="Self.Cinema" Multiplicity="1" />
+    <End Role="ProjectionRoom" Type="Self.ProjectionRoom" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cinema">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProjectionRoom">
+        <PropertyRef Name="IdCinema" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Work_Cinema">
+    <End Role="Cinema" Type="Self.Cinema" Multiplicity="1" />
+    <End Role="Work" Type="Self.Work" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cinema">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Work">
+        <PropertyRef Name="IdCinema" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Service_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Service" Type="Self.Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Service">
+        <PropertyRef Name="IdEmployee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Work_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Work" Type="Self.Work" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Work">
+        <PropertyRef Name="IdEmployee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Projection_ProjectionRoom">
+    <End Role="ProjectionRoom" Type="Self.ProjectionRoom" Multiplicity="1" />
+    <End Role="Projection" Type="Self.Projection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectionRoom">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Projection">
+        <PropertyRef Name="IdProjectionRoom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Service_Projection">
+    <End Role="Projection" Type="Self.Projection" Multiplicity="1" />
+    <End Role="Service" Type="Self.Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projection">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Service">
+        <PropertyRef Name="IdProjection" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ApbdEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cinema" EntityType="Self.Cinema" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" />
+    <EntitySet Name="Projection" EntityType="Self.Projection" />
+    <EntitySet Name="ProjectionRoom" EntityType="Self.ProjectionRoom" />
+    <EntitySet Name="Region" EntityType="Self.Region" />
+    <EntitySet Name="Seat" EntityType="Self.Seat" />
+    <EntitySet Name="Service" EntityType="Self.Service" />
+    <EntitySet Name="Work" EntityType="Self.Work" />
+    <AssociationSet Name="FK_Cinema_EmployeeManager" Association="Self.FK_Cinema_EmployeeManager">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Cinema" EntitySet="Cinema" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cinema_Region" Association="Self.FK_Cinema_Region">
+      <End Role="Region" EntitySet="Region" />
+      <End Role="Cinema" EntitySet="Cinema" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectionRoom_Cinema" Association="Self.FK_ProjectionRoom_Cinema">
+      <End Role="Cinema" EntitySet="Cinema" />
+      <End Role="ProjectionRoom" EntitySet="ProjectionRoom" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Work_Cinema" Association="Self.FK_Work_Cinema">
+      <End Role="Cinema" EntitySet="Cinema" />
+      <End Role="Work" EntitySet="Work" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Service_Employee" Association="Self.FK_Service_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Service" EntitySet="Service" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Work_Employee" Association="Self.FK_Work_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Work" EntitySet="Work" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Projection_ProjectionRoom" Association="Self.FK_Projection_ProjectionRoom">
+      <End Role="ProjectionRoom" EntitySet="ProjectionRoom" />
+      <End Role="Projection" EntitySet="Projection" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Service_Projection" Association="Self.FK_Service_Projection">
+      <End Role="Projection" EntitySet="Projection" />
+      <End Role="Service" EntitySet="Service" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

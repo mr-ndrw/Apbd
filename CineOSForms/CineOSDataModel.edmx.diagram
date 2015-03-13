@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a9c4b99272054d3eacd019afcc804a09" Name="Diagram1">
+        <EntityTypeShape EntityType="ApbdModel.Cinema" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ApbdModel.Employee" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ApbdModel.Projection" Width="1.5" PointX="7.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ApbdModel.ProjectionRoom" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ApbdModel.Region" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ApbdModel.Seat" Width="1.5" PointX="5.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="ApbdModel.Service" Width="1.5" PointX="9.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ApbdModel.Work" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="ApbdModel.FK_Cinema_EmployeeManager" ManuallyRouted="false" />
+        <AssociationConnector Association="ApbdModel.FK_Cinema_Region" ManuallyRouted="false" />
+        <AssociationConnector Association="ApbdModel.FK_ProjectionRoom_Cinema" ManuallyRouted="false" />
+        <AssociationConnector Association="ApbdModel.FK_Work_Cinema" ManuallyRouted="false" />
+        <AssociationConnector Association="ApbdModel.FK_Service_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="ApbdModel.FK_Work_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="ApbdModel.FK_Projection_ProjectionRoom" ManuallyRouted="false" />
+        <AssociationConnector Association="ApbdModel.FK_Service_Projection" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
